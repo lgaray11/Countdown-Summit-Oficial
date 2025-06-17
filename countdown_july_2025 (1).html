@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuenta Regresiva - ICPR Team Summit</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00cba9, #ffd166, #9b5de5);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    #countdown {
+      display: flex;
+      gap: 20px;
+      font-size: 2rem;
+    }
+    .time-box {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .time-box span {
+      display: block;
+      font-size: 1rem;
+      margin-top: 5px;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      #countdown {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Nos vemos en el ICPR Team Summit 2025!</h1>
+  <div id="countdown">
+    <div class="time-box" id="days">0<span>Días</span></div>
+    <div class="time-box" id="hours">0<span>Horas</span></div>
+    <div class="time-box" id="minutes">0<span>Minutos</span></div>
+    <div class="time-box" id="seconds">0<span>Segundos</span></div>
+  </div>
+
+  <script>
+    const targetDate = new Date("July 11, 2025 09:00:00").getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerHTML = days + "<span>Días</span>";
+      document.getElementById("hours").innerHTML = hours + "<span>Horas</span>";
+      document.getElementById("minutes").innerHTML = minutes + "<span>Minutos</span>";
+      document.getElementById("seconds").innerHTML = seconds + "<span>Segundos</span>";
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "¡Ya comenzó el evento!";
+      }
+    };
+
+    updateCountdown();
+    const x = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
